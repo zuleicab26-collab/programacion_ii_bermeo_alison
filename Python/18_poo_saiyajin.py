@@ -1,4 +1,4 @@
-from 17_poo_guerrero import Guerrero
+from poo_guerrero import Guerrero
 
 class Saiyajin(Guerrero):
     def __init__(self, nombre: str):
@@ -6,8 +6,10 @@ class Saiyajin(Guerrero):
 
     def trasnsformarse(self):        
         print(self.nombre, "transformarse en Super Saiyajin")       
-        self.nombre = "Super " + self.nombre
-        print(self.nombre, "transformarse en Super Saiyajin")
 
+
+goku = Saiyajin("Goku")
+goku.presentarse()
+goku.trasnsformarse()
 
         

@@ -21,7 +21,7 @@ radar_bulma = RadarDragon(3, 2)
 
 radar_bulma.buscar_esferas1(1)
 radar_bulma.buscar_esferas2(1)
-
+ 
 
 
 
