@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ep-arrswc)s977t@c9oiqor@okh(9v@jsjnbc0&a-99-w*nh-)'
+SECRET_KEY = 'django-insecure-cr5f43l!#1)1swp94%f%e0_hk397)0_(7!4rm1h7y&7pa0=lk2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'task',  
+    'tasks',
 ]
 
 MIDDLEWARE = [
@@ -125,4 +125,15 @@ MAILERS = {
     'default': {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
+}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'project_db',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',  # O la IP de tu servidor de base de datos
+        'PORT': '5432',       # Puerto predeterminado de PostgreSQL
+    }
 }
