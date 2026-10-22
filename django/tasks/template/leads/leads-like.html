@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR Brand - Realidad Virtual</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .titulo {
+            color: #c44fe8;
+            font-size: 15px;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .pagina {
+            width: 100%;
+            max-width: 1000px;
+            min-height: 460px;
+            display: flex;
+            overflow: hidden;
+            border-radius: 18px;
+            box-shadow: 5px 8px 15px #00000045;
+            background: #7420d5;
+        }
+
+        /* Lado izquierdo */
+
+        .contenido {
+            width: 62%;
+            padding: 25px 35px;
+            position: relative;
+            color: white;
+            background: linear-gradient(
+                145deg,
+                #6530ff 0%,
+                #7125db 55%,
+                #82118f 100%
+            );
+            clip-path: polygon(0 0, 100% 0, 67% 100%, 0 100%);
+            margin-right: -20%;
+            z-index: 2;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-bottom: 35px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 19px;
+            min-width: 85px;
+        }
+
+        .logo span {
+            display: block;
+            font-size: 14px;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 9px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #00e5ff;
+        }
+
+        .texto {
+            max-width: 340px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .texto h1 {
+            font-size: 25px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .texto h3 {
+            color: #00e5ff;
+            font-size: 14px;
+            font-weight: normal;
+            margin-bottom: 3px;
+        }
+
+        .texto p {
+            font-size: 10px;
+            line-height: 1.3;
+            margin-bottom: 13px;
+            max-width: 310px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            width: 210px;
+        }
+
+        input {
+            background: transparent;
+            border: 1.5px solid #00e5ff;
+            border-radius: 10px;
+            padding: 7px 10px;
+            color: white;
+            outline: none;
+            font-size: 10px;
+        }
+
+        input::placeholder {
+            color: white;
+        }
+
+        input:focus {
+            box-shadow: 0 0 8px #00e5ff;
+        }
+
+        button {
+            margin-top: 5px;
+            width: 140px;
+            padding: 9px;
+            border: none;
+            border-radius: 20px;
+            background: #00d5ed;
+            color: white;
+            font-size: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: white;
+            color: #7224d7;
+            transform: scale(1.03);
+        }
+
+        /* Redes sociales */
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            left: 25px;
+            z-index: 3;
+        }
+
+        .redes {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .redes a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            background: white;
+            color: #6726cf;
+            font-size: 10px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        footer p {
+            font-size: 11px;
+        }
+
+        /* Lado derecho: imagen */
+
+        .imagen {
+            flex: 1;
+            min-width: 0;
+            background:
+                linear-gradient(
+                    rgba(207, 126, 255, 0.35),
+                    rgba(207, 126, 255, 0.35)
+                ),
+                url("https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=1200&q=85");
+
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .imagen::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(232, 177, 255, 0.3),
+                rgba(192, 100, 255, 0.3)
+            );
+        }
+
+        /* Figuras decorativas */
+
+        .figura {
+            position: absolute;
+            color: #00e5ff;
+            font-size: 18px;
+            z-index: 1;
+        }
+
+        .figura.uno {
+            top: 100px;
+            right: 18%;
+        }
+
+        .figura.dos {
+            top: 210px;
+            right: 30%;
+        }
+
+        .figura.tres {
+            top: 275px;
+            right: 12%;
+        }
+
+        .figura.cuatro {
+            top: 40px;
+            right: 10%;
+        }
+
+        /* Adaptación para celulares */
+
+        @media (max-width: 650px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            .titulo {
+                margin-bottom: 18px;
+            }
+
+            .pagina {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .contenido {
+                width: 100%;
+                margin-right: 0;
+                clip-path: none;
+                padding: 25px 22px 100px;
+            }
+
+            header {
+                flex-wrap: wrap;
+                gap: 18px;
+                margin-bottom: 30px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .texto h1 {
+                font-size: 26px;
+            }
+
+            .texto p {
+                font-size: 12px;
+            }
+
+            form {
+                width: 100%;
+                max-width: 260px;
+            }
+
+            input {
+                padding: 10px;
+            }
+
+            button {
+                padding: 11px;
+            }
+
+            .imagen {
+                flex: none;
+                height: 280px;
+                width: 100%;
+            }
+
+            footer {
+                bottom: 20px;
+                left: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 class="titulo">LANDING PAGE TEMPLATE</h2>
+
+    <main class="pagina">
+
+        <section class="contenido">
+
+            <header>
+                <div class="logo">
+                    ▰ VR
+                    <span>BRAND</span>
+                </div>
+
+                <nav>
+                    <a href="#inicio">HOME</a>
+                    <a href="#acerca">ABOUT</a>
+                    <a href="#galeria">GALLERY</a>
+                    <a href="#contacto">CONTACT</a>
+                </nav>
+            </header>
+
+            <div class="texto" id="inicio">
+
+                <h1>
+                    GET NEXT<br>
+                    LEVEL EXPERIENCE
+                </h1>
+
+                <h3>Virtual reality experience</h3>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur
+                    adipiscing elit, sed diam nonummy nibh
+                    euismod tincidunt ut laoreet dolore
+                    magna aliquam erat volutpat.
+                </p>
+
+                <form id="formulario">
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        placeholder="NAME"
+                        required
+                    >
+
+                    <input
+                        type="email"
+                        id="correo"
+                        placeholder="EMAIL"
+                        required
+                    >
+
+                    <button type="submit">CONFIRM</button>
+
+                </form>
+
+            </div>
+
+            <div class="figura uno">✧</div>
+            <div class="figura dos">✦</div>
+            <div class="figura tres">○</div>
+            <div class="figura cuatro">+</div>
+
+            <footer id="contacto">
+
+                <div class="redes">
+                    <a href="https://instagram.com"
+                       aria-label="Instagram">◎</a>
+                    <a href="https://facebook.com"
+                       aria-label="Facebook">f</a>
+                    <a href="https://twitter.com"
+                       aria-label="Twitter">X</a>
+                    <a href="https://youtube.com"
+                       aria-label="YouTube">▶</a>
+                </div>
+
+                <p>www.vrbrand.com</p>
+
+            </footer>
+
+        </section>
+
+        <section class="imagen" id="galeria"
+                 aria-label="Imagen de realidad virtual">
+        </section>
+
+    </main>
+
+    <script>
+        const formulario = document.getElementById("formulario");
+
+        formulario.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById("nombre").value;
+
+            alert("¡Gracias, " + nombre +
+                  "! Tu formulario se ha enviado correctamente.");
+
+            formulario.reset();
+        });
+    </script>
+
+</body>
+</html>
