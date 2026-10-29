@@ -129,6 +129,13 @@ MAILERS = {
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'project_db',
         'USER': 'postgres',
@@ -137,3 +144,16 @@ DATABASES = {
         'PORT': '5432',       # Puerto predeterminado de PostgreSQL
     }
 }
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    # TU APP (ponla SOLO UNA VEZ, no ambas):
+    'tasks', 
+    # NO pongas 'tasks.apps.TasksConfig' si ya pusiste 'tasks'
+]
