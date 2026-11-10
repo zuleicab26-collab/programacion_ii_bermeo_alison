@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de libros</title>
+    
+</head>
+<body>
+    <h1>Lista de libros</h1>
+    {% if messages %}
+    <ul>
+        {% for mensaje in messages %}
+        <li>{{ mensaje }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <button>
+        <a href="{% url 'create_libro' %}">Crear nuevo libro</a>
+    </button>
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Fecha de publicación</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for libro in libros %}
+            <tr>
+                <td>{{ libro.titulo }}</td>
+                <td>{{ libro.autor }}</td>
+                <td>{{ libro.fecha_publicacion }}</td>
+                <td>
+                    <a href="{% url 'update_libro' libro.pk %}">Editar</a>
+                    <a href="{% url 'delete_libro' libro.pk %}">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No hay libros disponibles.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Total de libros: {{ libros|length }}</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

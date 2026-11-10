@@ -1,9 +1,9 @@
-from django.urls import path
-
-from views.categoria_views import categoria_create, categoria_list
+from django.urls import include, path
 
 
 urlpatterns = [
-    path('', categoria_list, name='categoria_list'),
-    path('categorias/nueva/', categoria_create, name='categoria_create'),
+    path('', include('url.home_urls')),
+    path('categoria/', include('url.libro_urls')),
+    path('catalogo/', include('url.categoria_urls')),
+    path('catalogo/', include('url.libro_urls')),
 ]
