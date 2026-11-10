@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if formulario.instance.pk %} Editar libro {% else %} Crear libro {% endif %}</title>
+</head>
+<body>
+    <h1>{% if formulario.instance.pk %} Editar libro {% else %} Crear libro {% endif %}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ formulario.as_p }}
+        <button type="submit">Guardar libro</button>
+    </form>
+</body>
+</html>
+            
+    

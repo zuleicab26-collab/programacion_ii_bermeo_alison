@@ -29,3 +29,34 @@ def categoria_create(request):
         'catalogo/categoria/formulario.html',
         {'formulario': form},
     )
+
+
+#Mami ia me ayudo sepa que hizo o por que hizo 
+def categoria_update(request, pk):
+    categoria = Categoria.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Categoría actualizada correctamente.')
+            return redirect('categoria_list')
+    else:
+        form = CategoriaForm(instance=categoria)
+    return render(
+        request,
+        'catalogo/categoria/formulario.html',
+        {'formulario': form},
+    )
+
+
+def categoria_delete(request, pk):
+    categoria = Categoria.objects.get(pk=pk)
+    if request.method == 'POST':
+        categoria.delete()
+        messages.success(request, 'Categoría eliminada correctamente.')
+        return redirect('categoria_list')
+    return render(
+        request,
+        'catalogo/categoria/categoria_confirm_delete.html',
+        {'categoria': categoria},
+    )
