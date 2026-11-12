@@ -13,3 +13,9 @@ from views.libro_views import (
     libro_list,
     update_libro,
 )
+from views.autor_views import (
+    autor_create,
+    autor_delete,
+    autor_list,
+    autor_update,
+)
