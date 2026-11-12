@@ -6,12 +6,18 @@
     <title>inicio</title>
 </head>
 <body>
-    <h1>Bienvenido a la Biblioteca</h1>
+    <h1>Inicio</h1>
+    <p>Bienvenido a la Biblioteca</p>
     <p>Explora nuestra colección de libros y categorías.</p>
     <p>Menu Principal</p>
     <ul>
         <li><a href="{% url 'categoria_list' %}">Categorías</a></li>
         <li><a href="{% url 'libro_list' %}">Libros</a></li>
+        <li><a href="{% url 'autor_list' %}">Autores</a></li>
     </ul>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+    </form>
 </body>
 </html>

@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de autores</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #fceef3, #eeeaff, #e8f4f5);
+            min-height: 100vh;
+            padding: 50px 20px;
+            color: #62566b;
+        }
+
+        .contenedor {
+            max-width: 1100px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            border-radius: 22px;
+            box-shadow: 0 10px 35px rgba(160, 130, 160, 0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #a77b99;
+            font-size: 38px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #8c83aa;
+            font-size: 21px;
+            font-weight: 400;
+            margin-bottom: 35px;
+        }
+
+        .mensajes {
+            background: #f8edf5;
+            border-left: 5px solid #d9a9c5;
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            list-style-position: inside;
+        }
+
+        .botones {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 22px;
+            background: #e8d9eb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button a {
+            text-decoration: none;
+            color: #6e5876;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #d6bfdc;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(160, 130, 160, 0.2);
+        }
+
+        .nuevo {
+            background: #eacbdc;
+        }
+
+        .nuevo:hover {
+            background: #dfb3ca;
+        }
+
+        .tabla-contenedor {
+            overflow-x: auto;
+            border-radius: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fffdfd;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        thead {
+            background: #e8dced;
+            color: #705d7b;
+        }
+
+        th {
+            padding: 17px;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid #f0e8f0;
+            font-size: 14px;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #faf5fa;
+        }
+
+        tbody tr:hover {
+            background: #f2e9f4;
+            transition: 0.3s;
+        }
+
+        td a {
+            display: inline-block;
+            text-decoration: none;
+            color: #98759e;
+            background: #f1e3f1;
+            padding: 7px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        td a:hover {
+            background: #dfc9e3;
+            color: #62466b;
+        }
+
+        .pie {
+            text-align: center;
+            margin-top: 25px;
+            color: #b19eb4;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .contenedor {
+                padding: 22px 15px;
+            }
+
+            h1 {
+                font-size: 29px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            th, td {
+                padding: 12px 9px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>✿ Biblioteca ✿</h1>
+        <h2>Listado de Autores</h2>
+
+        {% if messages %}
+            <ul class="mensajes">
+                {% for mensaje in messages %}
+                    <li>{{ mensaje }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <div class="botones">
+
+            {% if perms.catalogo.add_autor %}
+                <button class="nuevo">
+                    <a href="{% url 'autor_create' %}">＋ Nuevo autor</a>
+                </button>
+            {% endif %}
+
+            <button>
+                <a href="{% url 'libro_list' %}">📚 Lista de Libros</a>
+            </button>
+
+            <button>
+                <a href="{% url 'home' %}">← Atrás</a>
+            </button>
+
+        </div>
+
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Nacionalidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for autor in autores %}
+                        <tr>
+                            <td>{{ autor.id }}</td>
+                            <td>{{ autor.nombre }}</td>
+                            <td>{{ autor.apellido }}</td>
+                            <td>{{ autor.nacionalidad|default_if_none:"" }}</td>
+                            <td>
+                                {% if perms.catalogo.change_autor %}
+                                    <a href="{% url 'autor_update' autor.pk %}">
+                                        ✎ Editar
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5">
+                                No hay autores registrados.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pie">
+            ✿ Biblioteca Digital · Gestión de Autores ✿
+        </div>
+
+    </div>
+
+</body>
+</html>

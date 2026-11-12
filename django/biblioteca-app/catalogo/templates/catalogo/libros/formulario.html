@@ -6,13 +6,17 @@
     <title>{% if formulario.instance.pk %} Editar libro {% else %} Crear libro {% endif %}</title>
 </head>
 <body>
-    <h1>{% if formulario.instance.pk %} Editar libro {% else %} Crear libro {% endif %}</h1>
-    <form method="POST">
+    <h1>{% if formulario.instance.pk %}Editar Libro{% else %}Crear Libro{% endif %}</h1>
+    <form method="post">
         {% csrf_token %}
-        {{ formulario.as_p }}
-        <button type="submit">Guardar libro</button>
+        {% for campo in formulario %}
+        <p>
+            {{ campo.label_tag }}
+            {{ campo }}
+            {{ campo.errors }}
+        </p>
+        {% endfor %}
+        <button type="submit">Guardar</button>
     </form>
 </body>
 </html>
-            
-    
